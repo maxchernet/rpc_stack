@@ -1,6 +1,11 @@
 """
+Author: Maxim Chernetskiy, 2019, UCL
+
 RPC -> tif
 gdal_merge
+
+Example of usage:
+python rpc-meta_ts.py --c2_tif input_tif.txt --c2_rpc input_rpc.txt --c2_out output/
 """
 
 import sys
@@ -158,6 +163,8 @@ def merge(tif_in_lst, tif_lst_rpc, f_dir_out):
     print(cmd_merge)
     print(com_out)
 
+    f_stack = open('input_tif_stack.txt', 'w')
+
     for i in range(1, nl+1):
         f_out_trans = f_dir_out + tif_in_lst[i-1].split("/")[-1].split(".")[0] + "_stacked.tif"
         if os.path.isfile(f_out_trans):
@@ -168,13 +175,17 @@ def merge(tif_in_lst, tif_lst_rpc, f_dir_out):
         print(cmd_str)
         print(com_out)
 
+        f_stack.write(f_out_trans + '\n')
+
         # Set RPCs to metadata
         # gds_rpc = gdal.Open(tif_lst_rpc[i-1], gdal.gdalconst.GA_ReadOnly)
         # gds_rect = gdal.Open(f_out_trans, gdal.gdalconst.GA_Update)
         # rpc_meta = gds_rpc.GetMetadata('RPC')
         # gds_rect.SetMetadata(rpc_meta, 'RPC')
-        del gds_rpc
-        del gds_rect
+        # del gds_rpc
+        # del gds_rect
+
+    f_stack.close()
 
 
 if __name__ == "__main__":
