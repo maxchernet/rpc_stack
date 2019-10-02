@@ -78,6 +78,6 @@ f_out = '/Volumes/lacie_data/satellite/carbonite-2/VX02000379/meta/VX02000379_00
 #           tif_in,
 #           fname_out = f_out)
 
-save_meta(rpc_in = args.c2_tif,
-          tif_in = args.c2_rpc,
+save_meta(rpc_in = args.c2_rpc,
+          tif_in = args.c2_tif,
           fname_out = args.c2_out)
